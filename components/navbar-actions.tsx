@@ -1,13 +1,17 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 import { ShoppingBag } from 'lucide-react';
 import Button from './ui/button';
+import useCart from '@/hooks/use-cart';
 
 export default function NavbarActions() {
   // hydration trick
   const [isMounted, setIsMounted] = useState(false);
+  const router = useRouter();
+  const cart = useCart();
 
   useEffect(() => {
     setIsMounted(true);
@@ -17,9 +21,12 @@ export default function NavbarActions() {
 
   return (
     <div className='ml-auto flex items-center gap-x-4'>
-      <Button className='flex items-center rounded-full bg-black px-4 py-2'>
+      <Button
+        onClick={() => router.push('/cart')}
+        className='flex items-center rounded-full bg-black px-4 py-2'
+      >
         <ShoppingBag size={20} color='white' />
-        <span className='ml-2 text-sm font-medium'>0</span>
+        <span className='ml-2 text-sm font-medium'>{cart.items.length}</span>
       </Button>
     </div>
   );
