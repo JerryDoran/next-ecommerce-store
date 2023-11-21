@@ -5,9 +5,17 @@ import useCart from '@/hooks/use-cart';
 
 import Container from '@/components/ui/container';
 import CartItem from './components/cart-item';
+import Summary from './components/summary';
 
 export default function Cart() {
   const cart = useCart();
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (!isMounted) return null;
 
   return (
     <div className='bg-white'>
@@ -25,6 +33,7 @@ export default function Cart() {
                 ))}
               </ul>
             </div>
+            <Summary />
           </div>
         </div>
       </Container>
