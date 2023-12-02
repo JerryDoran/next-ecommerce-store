@@ -8,7 +8,7 @@ import Button from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 
 type FilterProps = {
-  data: Size | Color[];
+  data: Size[] | Color[];
   name: string;
   valueKey: string;
 };
